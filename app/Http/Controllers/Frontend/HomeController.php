@@ -15,4 +15,20 @@ class HomeController extends Controller
         //return view with data
         return view('frontend.home', compact('produks'));
     }
+
+    public function shop()
+    {
+        //get all produks from Models
+        $produks = Produk::latest()->get();
+
+        //return view with data
+        return view('frontend.shop', compact('produks'));
+    }
+
+    public function detail_produk($id)
+    {
+        $produk = Produk::where('id', $id)->first();
+        
+        return view('frontend.detail-produk',  compact('produk'));
+    }
 }

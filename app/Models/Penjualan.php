@@ -10,13 +10,21 @@ class Penjualan extends Model
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'tanggal',
-        'total_harga',
-        'pelanggan_id',
+        'status',
+        'kode',
+        'Jumlah_harga'
+
     ];
 
     public function user()
-    {
-        return $this->belongsTo(User::class, 'pelanggan_id');
-    }
+	{
+	      return $this->belongsTo('App\Models\User','user_id', 'id');
+	}
+
+	public function detail_penjualan() 
+	{
+	     return $this->hasMany('App\Models\DetailPenjualan','penjualan_id', 'id');
+	}
 }

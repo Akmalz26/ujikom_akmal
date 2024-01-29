@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\Backend\PenjualanController;
-use App\Http\Controllers\Backend\ProdukController;
+use App\Http\Controllers\PenjualanController;
+use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InfoUserController;
@@ -26,7 +26,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => 'auth'], function () {
 
-    Route::get('/', [HomeController::class, 'dashboard']);
+    Route::get('/dashboard', [HomeController::class, 'dashboard']);
 	Route::get('dashboard', function () {
 		return view('dashboard');
 	})->name('dashboard');
@@ -98,4 +98,20 @@ Route::get('/login', function () {
 })->name('login');
 
 
-Route::get('/home', 'App\Http\Controllers\Frontend\HomeController@index')->name('home');
+Route::get('/', 'App\Http\Controllers\Frontend\HomeController@index')->name('home');
+Route::get('shop', 'App\Http\Controllers\Frontend\HomeController@shop')->name('shop');
+
+Route::get('pesan/{id}', 'App\Http\Controllers\PesanController@index');
+Route::post('pesan/{id}', 'App\Http\Controllers\PesanController@pesan');
+Route::get('check-out', 'App\Http\Controllers\PesanController@check_out');
+Route::delete('check-out/{id}', 'App\Http\Controllers\PesanController@delete');
+
+Route::get('konfirmasi-check-out', 'App\Http\Controllers\PesanController@konfirmasi');
+
+Route::get('profile', 'App\Http\Controllers\ProfileController@index');
+Route::get('edit-profile', 'App\Http\Controllers\ProfileController@edit')->name('profile.edit');;
+Route::post('profile', 'App\Http\Controllers\ProfileController@update');
+
+Route::get('history', 'App\Http\Controllers\HistoryController@index');
+Route::get('history/{id}', 'App\Http\Controllers\HistoryController@detail');
+

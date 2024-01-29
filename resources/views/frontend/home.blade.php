@@ -23,7 +23,7 @@
 		<nav class="custom-navbar navbar navbar navbar-expand-md navbar-dark bg-dark" arial-label="Furni navigation bar">
 
 			<div class="container">
-				<a class="navbar-brand" href="frontend/index.html">Furni<span>.</span></a>
+				<a class="navbar-brand" href="frontend/index.html">Alchira<span>.</span></a>
 
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsFurni" aria-controls="navbarsFurni" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
@@ -34,7 +34,7 @@
 						<li class="nav-item active">
 							<a class="nav-link" href="frontend/index.html">Home</a>
 						</li>
-						<li><a class="nav-link" href="frontend/shop.html">Shop</a></li>
+						<li><a class="nav-link" href="/shop">Shop</a></li>
 						<li><a class="nav-link" href="frontend/about.html">About us</a></li>
 						<li><a class="nav-link" href="frontend/services.html">Services</a></li>
 						<li><a class="nav-link" href="frontend/blog.html">Blog</a></li>
@@ -64,7 +64,7 @@
 						</div>
 						<div class="col-lg-7">
 							<div class="hero-img-wrap">
-								<img src="frontend/images/couch.png" class="img-fluid">
+								{{-- <img src="frontend/images/couch.png" class="img-fluid"> --}}
 							</div>
 						</div>
 					</div>
@@ -86,47 +86,20 @@
 					<!-- End Column 1 -->
 
 					<!-- Start Column 2 -->
+					@foreach($produks as $produk)
 					<div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
-						<a class="product-item" href="frontend/cart.html">
-							<img src="frontend/images/product-1.png" class="img-fluid product-thumbnail">
-							<h3 class="product-title">Nordic Chair</h3>
-							<strong class="product-price">$50.00</strong>
+						<a class="product-item" href="{{ url('pesan') }}/{{ $produk->id }}">
+							<img src="{{ asset('image/' . $produk->image) }}" class="img-fluid product-thumbnail">
+							<h3 class="product-title">{{ $produk->nama }}</h3>
+							<strong class="product-price">Rp. {{ number_format ($produk->harga) }}</strong>
 
 							<span class="icon-cross">
 								<img src="frontend/images/cross.svg" class="img-fluid">
 							</span>
 						</a>
 					</div> 
+					@endforeach
 					<!-- End Column 2 -->
-
-					<!-- Start Column 3 -->
-					<div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
-						<a class="product-item" href="frontend/cart.html">
-							<img src="frontend/images/product-2.png" class="img-fluid product-thumbnail">
-							<h3 class="product-title">Kruzo Aero Chair</h3>
-							<strong class="product-price">$78.00</strong>
-
-							<span class="icon-cross">
-								<img src="frontend/images/cross.svg" class="img-fluid">
-							</span>
-						</a>
-					</div>
-					<!-- End Column 3 -->
-
-					<!-- Start Column 4 -->
-					<div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
-						<a class="product-item" href="frontend/cart.html">
-							<img src="frontend/images/product-3.png" class="img-fluid product-thumbnail">
-							<h3 class="product-title">Ergonomic Chair</h3>
-							<strong class="product-price">$43.00</strong>
-
-							<span class="icon-cross">
-								<img src="frontend/images/cross.svg" class="img-fluid">
-							</span>
-						</a>
-					</div>
-					<!-- End Column 4 -->
-
 				</div>
 			</div>
 		</div>

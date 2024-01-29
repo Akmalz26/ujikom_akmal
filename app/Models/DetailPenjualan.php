@@ -10,9 +10,20 @@ class DetailPenjualan extends Model
     use HasFactory;
 
     protected $fillable = [
-        'penjualan_id',
         'produk_id',
-        'jumlah_produk',
-        'subtotal',
+        'penjualan_id',
+        'jumlah',
+        'Jumlah_harga'
+
     ];
+
+    public function produk()
+	{
+	      return $this->belongsTo('App\Models\produk','produk_id', 'id');
+	}
+
+	public function penjualan()
+	{
+	      return $this->belongsTo('App\Models\penjualan','penjualan_id', 'id');
+	}
 }
