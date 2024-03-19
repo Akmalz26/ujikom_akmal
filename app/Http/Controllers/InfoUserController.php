@@ -13,45 +13,49 @@ class InfoUserController extends Controller
 
     public function create()
     {
-        return view('laravel-examples/user-profile');
+        $users = User::all();
+        return view('laravel-examples/user-profile', compact('users'));
     }
 
     public function store(Request $request)
-    {
+{
+    $attributes = request()->validate([
+        'name' => ['required', 'max:50'],
+        'email' => ['required', 'email', 'max:50', Rule::unique('users')->ignore(Auth::user()->id)],
+        'phone' => ['max:50'],
+        'location' => ['max:70'],
+        'image' => ['image', 'mimes:jpeg,png,jpg,gif', 'max:2048'], // max 2MB for example
+    ]);
 
-        $attributes = request()->validate([
-            'name' => ['required', 'max:50'],
-            'email' => ['required', 'email', 'max:50', Rule::unique('users')->ignore(Auth::user()->id)],
-            'phone'     => ['max:50'],
-            'location' => ['max:70'],
-            'about_me'    => ['max:150'],
+    // Validate if email is changed
+    if ($request->email != Auth::user()->email) {
+        request()->validate([
+            'email' => ['required', 'email', 'max:50', Rule::unique('users')],
         ]);
-        if($request->get('email') != Auth::user()->email)
-        {
-            if(env('IS_DEMO') && Auth::user()->id == 1)
-            {
-                return redirect()->back()->withErrors(['msg2' => 'You are in a demo version, you can\'t change the email address.']);
-                
-            }
-            
-        }
-        else{
-            $attribute = request()->validate([
-                'email' => ['required', 'email', 'max:50', Rule::unique('users')->ignore(Auth::user()->id)],
-            ]);
-        }
-        
-        
-        User::where('id',Auth::user()->id)
-        ->update([
-            'name'    => $attributes['name'],
-            'email' => $attribute['email'],
-            'phone'     => $attributes['phone'],
-            'location' => $attributes['location'],
-            'about_me'    => $attributes["about_me"],
-        ]);
-
-
-        return redirect('/user-profile')->with('success','Profile updated successfully');
     }
+
+    // Handle image upload
+    $imageName = Auth::user()->image; // Default to current image
+    if ($request->hasFile('image')) {
+        $image = $request->file('image');
+        $imageName = $image->getClientOriginalName();
+        $image->move(public_path('image'), $imageName);
+    }
+
+    // Update user profile
+    $user = User::find(Auth::user()->id);
+    $user->name = $attributes['name'];
+    $user->email = $attributes['email'];
+    $user->phone = $attributes['phone'];
+    $user->location = $attributes['location'];
+    $user->image = $imageName;
+    $user->save();
+
+    return redirect('/user-profile')->with('success', 'Profile updated successfully');
+}
+
+
+    
+
+
 }

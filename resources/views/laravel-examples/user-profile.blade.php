@@ -9,12 +9,18 @@
         </div>
         <div class="card card-body blur shadow-blur mx-4 mt-n6">
             <div class="row gx-4">
+
                 <div class="col-auto">
                     <div class="avatar avatar-xl position-relative">
-                        <img src="../assets/img/bruce-mars.jpg" alt="..." class="w-100 border-radius-lg shadow-sm">
-                        <a href="javascript:;" class="btn btn-sm btn-icon-only bg-gradient-light position-absolute bottom-0 end-0 mb-n2 me-n2">
-                            <i class="fa fa-pen top-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Image"></i>
-                        </a>
+                    @foreach($users as $user)
+                        <img src="{{ asset('image/' . $user->image ) }}" alt="..." class="w-100 border-radius-lg shadow-sm">
+                        @endforeach
+                        <form action="/user-profile" method="POST" id="profileForm" role="form text-left" enctype="multipart/form-data">
+                    @csrf
+                        <label for="image" class="btn btn-sm btn-icon-only bg-gradient-light position-absolute bottom-0 end-0 mb-n2 me-n2">
+                                <i class="fa fa-pen top-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Image">{{ __('') }}</i>
+                            </label>
+                            <input type="file" id="image" name="image" style="display: none; " value="{{ auth()->user()->image }}">
                     </div>
                 </div>
                 <div class="col-auto my-auto">
@@ -23,7 +29,7 @@
                             {{ auth()->user()->name }}
                         </h5>
                         <p class="mb-0 font-weight-bold text-sm">
-                            {{ __(' CEO / Co-Founder') }}
+                            {{ __('Admin') }}
                         </p>
                     </div>
                 </div>
@@ -103,8 +109,7 @@
                 <h6 class="mb-0">{{ __('Profile Information') }}</h6>
             </div>
             <div class="card-body pt-4 p-3">
-                <form action="/user-profile" method="POST" role="form text-left">
-                    @csrf
+                
                     @if($errors->any())
                         <div class="mt-3  alert alert-primary alert-dismissible fade show" role="alert">
                             <span class="alert-text text-white">
@@ -152,7 +157,7 @@
                             <div class="form-group">
                                 <label for="user.phone" class="form-control-label">{{ __('Phone') }}</label>
                                 <div class="@error('user.phone')border border-danger rounded-3 @enderror">
-                                    <input class="form-control" type="tel" placeholder="40770888444" id="number" name="phone" value="{{ auth()->user()->phone }}">
+                                    <input class="form-control" type="tel" placeholder="+62 " id="number" name="phone" value="{{ auth()->user()->phone }}">
                                         @error('phone')
                                             <p class="text-danger text-xs mt-2">{{ $message }}</p>
                                         @enderror
@@ -169,11 +174,11 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="about">{{ 'About Me' }}</label>
-                        <div class="@error('user.about')border border-danger rounded-3 @enderror">
-                            <textarea class="form-control" id="about" rows="3" placeholder="Say something about yourself" name="about_me">{{ auth()->user()->about_me }}</textarea>
+                        <div class="@error('user.image')border border-danger rounded-3 @enderror">
+        
                         </div>
                     </div>
+
                     <div class="d-flex justify-content-end">
                         <button type="submit" class="btn bg-gradient-dark btn-md mt-4 mb-4">{{ 'Save Changes' }}</button>
                     </div>
@@ -183,4 +188,10 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.getElementById('image').onchange = function() {
+        document.getElementById('profileForm').submit();
+    };
+</script>
 @endsection
