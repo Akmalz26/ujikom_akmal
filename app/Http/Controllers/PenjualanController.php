@@ -11,11 +11,11 @@ class PenjualanController extends Controller
     {
         //get all penjualans from Models
         $penjualans = penjualan::latest()->get();
-        $users = User::all();
+        $user = User::all();
         
 
         //return view with data
-        return view('penjualan.index', compact('penjualans', 'users'));
+        return view('penjualan.index', compact('penjualans', 'user'));
     }
     
 }

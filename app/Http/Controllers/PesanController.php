@@ -81,8 +81,24 @@ class PesanController extends Controller
     	$penjualan->update();
     	
         // Alert::success('penjualan Sukses Masuk Keranjang', 'Success');
-    	return redirect('check-out');
+    	return redirect('cart');
 
+    }
+
+    public function updateQuantity(Request $request, $id)
+    {
+        $detailPenjualan = DetailPenjualan::findOrFail($id);
+        $detailPenjualan->jumlah = $request->jumlah;
+        $detailPenjualan->jumlah_harga = $request->jumlah * $detailPenjualan->produk->harga;
+        $detailPenjualan->save();
+
+        // Perbarui total harga di penjualan
+        $penjualan = Penjualan::findOrFail($detailPenjualan->penjualan_id);
+        $totalHarga = DetailPenjualan::where('penjualan_id', $penjualan->id)->sum('jumlah_harga');
+        $penjualan->jumlah_harga = $totalHarga;
+        $penjualan->save();
+
+        return response()->json(['success' => true]);
     }
 
     public function check_out()
@@ -95,7 +111,7 @@ class PesanController extends Controller
 
         }
         
-        return view('pesan.check_out', compact('penjualan', 'detail_penjualans'));
+        return view('pesan.cart', compact('penjualan', 'detail_penjualans'));
     }
 
     public function delete($id)
@@ -110,7 +126,7 @@ class PesanController extends Controller
         $detail_penjualan->delete();
 
         // Alert::error('penjualan Sukses Dihapus', 'Hapus');
-        return redirect('check-out');
+        return redirect('cart');
     }
 
     public function konfirmasi()

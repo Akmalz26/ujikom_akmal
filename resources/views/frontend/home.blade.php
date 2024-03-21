@@ -35,15 +35,11 @@
 							<a class="nav-link" href="frontend/index.html">Home</a>
 						</li>
 						<li><a class="nav-link" href="/shop">Shop</a></li>
-						<li><a class="nav-link" href="frontend/about.html">About us</a></li>
-						<li><a class="nav-link" href="frontend/services.html">Services</a></li>
-						<li><a class="nav-link" href="frontend/blog.html">Blog</a></li>
-						<li><a class="nav-link" href="frontend/contact.html">Contact us</a></li>
 					</ul>
 
 					<ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
-						<li><a class="nav-link" href="#"><img src="frontend/images/user.svg"></a></li>
-						<li><a class="nav-link" href="frontend/cart.html"><img src="frontend/images/cart.svg"></a></li>
+						<li><a class="nav-link" href="profile"><img src="frontend/images/user.svg"></a></li>
+						<li><a class="nav-link" href="cart"><img src="frontend/images/cart.svg"></a></li>
 					</ul>
 				</div>
 			</div>

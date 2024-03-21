@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DetailPenjualanConroller;
 use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\ChangePasswordController;
@@ -36,9 +37,9 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('billing');
 	})->name('billing');
 
-	Route::get('profile', function () {
-		return view('profile');
-	})->name('profile');
+	// Route::get('profile', function () {
+	// 	return view('profile');
+	// })->name('profile');
 
 	Route::get('rtl', function () {
 		return view('rtl');
@@ -75,6 +76,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('user-management', UserController::class);
 	Route::resource('produk', ProdukController::class);
 	Route::resource('penjualan', PenjualanController::class);
+	Route::resource('detail-penjualan', DetailPenjualanConroller::class);
 
 });
 
@@ -104,8 +106,10 @@ Route::get('shop', 'App\Http\Controllers\Frontend\HomeController@shop')->name('s
 
 Route::get('pesan/{id}', 'App\Http\Controllers\PesanController@index');
 Route::post('pesan/{id}', 'App\Http\Controllers\PesanController@pesan');
-Route::get('check-out', 'App\Http\Controllers\PesanController@check_out');
-Route::delete('check-out/{id}', 'App\Http\Controllers\PesanController@delete');
+Route::get('cart', 'App\Http\Controllers\PesanController@check_out');
+Route::delete('cart/{id}', 'App\Http\Controllers\PesanController@delete');
+Route::post('update-quantity/{id}', 'App\Http\Controllers\PesanController@updateQuantity')->name('update.quantity');
+
 
 Route::get('konfirmasi-check-out', 'App\Http\Controllers\PesanController@konfirmasi');
 

@@ -87,8 +87,8 @@
                   ADD TO CART
                 </button>
                 
-                <button class="product-slider__fav js-fav"><span class="heart"></span> ADD TO WISHLIST</button>
               </form>
+                <button class="product-slider__fav js-fav"><span class="heart"></span> ADD TO WISHLIST</button>
               </div>
             </div>
           </div>

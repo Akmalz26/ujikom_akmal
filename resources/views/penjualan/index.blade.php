@@ -26,7 +26,7 @@
                   <tbody id="table-penjualans">
                     @foreach($penjualans as $penjualan)
                     <tr id="index_{{ $penjualan->id }}">
-                        <td  class="align-middle text-center text-sm">{{ $penjualan->users->name }}</td>
+                        <td  class="align-middle text-center text-sm">{{ $penjualan->user->name }}</td>
                         <td  class="align-middle text-center text-sm">Rp. {{ number_format ($penjualan->jumlah_harga) }}</td>
                         <td  class="align-middle text-center text-sm">{{ $penjualan->tanggal }}</td>
                     </tr>
