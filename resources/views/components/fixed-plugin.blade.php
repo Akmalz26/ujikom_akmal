@@ -46,10 +46,9 @@
           <h6 class="mb-0">Navbar Fixed</h6>
         </div>
         <div class="form-check form-switch ps-0">
-          <input class="form-check-input mt-1 ms-auto  {{ (Request::is('rtl') ? 'float-end' : '') }}"" type="checkbox" id="navbarFixed" onclick="navbarFixed(this)">
+          <input class="form-check-input mt-1 ms-auto  {{ (Request::is('rtl') ? 'float-end' : '') }}" type="checkbox" id="navbarFixed" onclick="navbarFixed(this)">
         </div>
         <hr class="horizontal dark my-sm-4">
-        <a class="btn bg-gradient-dark w-100" href="https://www.creative-tim.com/product/soft-ui-dashboard-laravel" target="_blank">Free Download</a>
         <a class="btn btn-outline-dark w-100" href="/documentation/getting-started/overview.html" target="_blank">View documentation</a>
         <div class="w-100 text-center">
           <a class="github-button" href="https://github.com/creativetimofficial/soft-ui-dashboard-laravel" target="_blank" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star creativetimofficial/soft-ui-dashboard on GitHub">Star</a>

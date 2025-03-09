@@ -5,8 +5,7 @@ use App\Models\Produk;
 use App\Models\penjualan;
 use App\Models\User;
 use App\Models\DetailPenjualan;
-use Auth;
-use Alert;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class HistoryController extends Controller

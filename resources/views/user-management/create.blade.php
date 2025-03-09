@@ -40,13 +40,6 @@
                     </select>
                     <div class="alert alert-danger mt-2 d-none" role="alert" id="alert-role"></div>
                 </div>
-
-                <!-- <div class="form-group">
-                    <label for="name" class="control-label">image</label>
-                    <input type="file" class="form-control" id="image">
-                    <div class="alert alert-danger mt-2 d-none" role="alert" id="alert-image"></div>
-                </div> -->
-
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">TUTUP</button>
@@ -122,9 +115,15 @@
                         <td>${response.data.role}</td>
                         <td>${response.data.crated_at}</td>
                         <td class="text-center">
-                            <a href="javascript:void(0)" id="btn-edit-user" data-id="${response.data.id}" class="btn btn-primary btn-sm">EDIT</a>
-                            <a href="javascript:void(0)" id="btn-delete-user" data-id="${response.data.id}" class="btn btn-danger btn-sm">DELETE</a>
-                        </td>
+                                        <a href="javascript:void(0)"  id="btn-edit-user" data-id="${response.data.id}" class="mx-3" data-bs-toggle="tooltip" data-bs-original-title="Edit user">
+                                            <i class="fas fa-edit text-secondary"></i>
+                                        </a>
+                                        <span>
+                                            <a href="javascript:void(0)"  id="btn-delete-user" data-id="${response.data.id}" class="mx-3" data-bs-toggle="tooltip" data-bs-original-title="Delete user">
+                                            <i class="cursor-pointer fas fa-trash text-secondary"></i>
+                                            </a>
+                                        </span>
+                                    </td>
                     </tr>
                 `;
 

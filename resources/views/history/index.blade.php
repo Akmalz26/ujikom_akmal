@@ -1,5 +1,22 @@
-@extends('layouts.home')
+@extends('layouts.header')
 @section('content')
+<!-- Start Hero Section -->
+<div class="hero">
+    <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-lg-5">
+                <div class="intro-excerpt">
+                    <h1>Hitory</h1>
+                </div>
+            </div>
+            <div class="col-lg-7">
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Hero Section -->
+
 <div class="container">
     <div class="row">
         <div class="col-md-12 mt-5">

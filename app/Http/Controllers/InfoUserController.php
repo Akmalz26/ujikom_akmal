@@ -14,7 +14,7 @@ class InfoUserController extends Controller
     public function create()
     {
         $users = User::all();
-        return view('laravel-examples/user-profile', compact('users'));
+        return view('user-profile', compact('users'));
     }
 
     public function store(Request $request)

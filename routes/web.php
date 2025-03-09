@@ -4,6 +4,7 @@ use App\Http\Controllers\DetailPenjualanConroller;
 use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\ChangePasswordController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InfoUserController;
 use App\Http\Controllers\RegisterController;
@@ -24,62 +25,28 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::group(['middleware' => ['auth', 'admin']], function () {
 
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');;
+	// Route::get('dashboard', function () {
+	// 	return view('dashboard');
+	// })->name('dashboard');
 
-Route::group(['middleware' => 'auth'], function () {
-
-    Route::get('/dashboard', [HomeController::class, 'dashboard']);
-	Route::get('dashboard', function () {
-		return view('dashboard');
-	})->name('dashboard');
-
-	Route::get('billing', function () {
-		return view('billing');
-	})->name('billing');
-
-	// Route::get('profile', function () {
-	// 	return view('profile');
-	// })->name('profile');
-
-	Route::get('rtl', function () {
-		return view('rtl');
-	})->name('rtl');
-
-	// Route::get('user-management', function () {
-	// 	return view('laravel-examples/user-management');
-	// })->name('user-management');
-
-	Route::get('tables', function () {
-		return view('tables');
-	})->name('tables');
-
-    Route::get('virtual-reality', function () {
-		return view('virtual-reality');
-	})->name('virtual-reality');
-
-    Route::get('static-sign-in', function () {
-		return view('static-sign-in');
-	})->name('sign-in');
-
-    Route::get('static-sign-up', function () {
-		return view('static-sign-up');
-	})->name('sign-up');
-
-    Route::get('/logout', [SessionsController::class, 'destroy']);
 	Route::get('/user-profile', [InfoUserController::class, 'create']);
 	Route::post('/user-profile', [InfoUserController::class, 'store']);
     Route::get('/login', function () {
 		return view('dashboard');
 	})->name('sign-up');
-
-
+	
+	
 	Route::resource('user-management', UserController::class);
 	Route::resource('produk', ProdukController::class);
 	Route::resource('penjualan', PenjualanController::class);
 	Route::resource('detail-penjualan', DetailPenjualanConroller::class);
-
+	
 });
 
+Route::get('/logout', [SessionsController::class, 'destroy']);
 
 
 Route::group(['middleware' => 'guest'], function () {
@@ -106,17 +73,16 @@ Route::get('shop', 'App\Http\Controllers\Frontend\HomeController@shop')->name('s
 
 Route::get('pesan/{id}', 'App\Http\Controllers\PesanController@index');
 Route::post('pesan/{id}', 'App\Http\Controllers\PesanController@pesan');
-Route::get('cart', 'App\Http\Controllers\PesanController@check_out');
+Route::get('cart', 'App\Http\Controllers\PesanController@check_out')->name('cart');
 Route::delete('cart/{id}', 'App\Http\Controllers\PesanController@delete');
 Route::post('update-quantity/{id}', 'App\Http\Controllers\PesanController@updateQuantity')->name('update.quantity');
 
 
 Route::get('konfirmasi-check-out', 'App\Http\Controllers\PesanController@konfirmasi');
 
-Route::get('profile', 'App\Http\Controllers\ProfileController@index');
-Route::get('edit-profile', 'App\Http\Controllers\ProfileController@edit')->name('profile.edit');;
-Route::post('profile', 'App\Http\Controllers\ProfileController@update');
+Route::get('profile', 'App\Http\Controllers\ProfileController@index')->name('profile');
+Route::post('profile', 'App\Http\Controllers\ProfileController@store');
 
-Route::get('history', 'App\Http\Controllers\HistoryController@index');
+Route::get('history', 'App\Http\Controllers\HistoryController@index')->name('history');
 Route::get('history/{id}', 'App\Http\Controllers\HistoryController@detail');
 

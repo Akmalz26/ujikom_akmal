@@ -5,8 +5,7 @@ use App\Models\Produk;
 use App\Models\Penjualan;
 use App\Models\User;
 use App\Models\DetailPenjualan;
-use Auth;
-// use Alert;
+use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -133,17 +132,17 @@ class PesanController extends Controller
     {
         $user = User::where('id', Auth::user()->id)->first();
 
-        if(empty($user->location))
-        {
-            // Alert::error('Identitasi Harap dilengkapi', 'Error');
-            return redirect('profile');
-        }
+        // if(empty($user->location))
+        // {
+        //     // Alert::error('Identitasi Harap dilengkapi', 'Error');
+        //     return redirect('profile');
+        // }
 
-        if(empty($user->phone))
-        {
-            // Alert::error('Identitasi Harap dilengkapi', 'Error');
-            return redirect('profile');
-        }
+        // if(empty($user->phone))
+        // {
+        //     // Alert::error('Identitasi Harap dilengkapi', 'Error');
+        //     return redirect('profile');
+        // }
 
         $penjualan = penjualan::where('user_id', Auth::user()->id)->where('status',0)->first();
         $penjualan_id = $penjualan->id;

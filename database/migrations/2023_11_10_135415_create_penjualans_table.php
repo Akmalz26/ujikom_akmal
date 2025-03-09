@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('kode');
             $table->integer('jumlah_harga');
             
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

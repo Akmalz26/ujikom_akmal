@@ -91,7 +91,6 @@ class ProdukController extends Controller
         $produk->image = $imageName;
     }
 
-    $produk->id_kasir = $request->id_kasir;
     $produk->nama = $request->nama;
     $produk->deskripsi = $request->deskripsi;
     $produk->harga = $request->harga;
