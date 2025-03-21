@@ -19,11 +19,11 @@ class DetailPenjualan extends Model
 
     public function produk()
 	{
-	      return $this->belongsTo('App\Models\produk','produk_id', 'id');
+	      return $this->belongsTo('App\Models\Produk','produk_id', 'id');
 	}
 
 	public function penjualan()
 	{
-	      return $this->belongsTo('App\Models\penjualan','penjualan_id', 'id');
+	      return $this->belongsTo('App\Models\Penjualan','penjualan_id', 'id');
 	}
 }
