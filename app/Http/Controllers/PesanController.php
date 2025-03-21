@@ -50,7 +50,7 @@ class PesanController extends Controller
     	
 
     	//simpan ke database penjualan detail
-    	$penjualan_baru = penjualan::where('user_id', Auth::user()->id)->where('status',0)->first();
+    	$penjualan_baru = Penjualan::where('user_id', Auth::user()->id)->where('status',0)->first();
 
     	//cek penjualan detail
     	$cek_detail_penjualan = DetailPenjualan::where('produk_id', $produk->id)->where('penjualan_id', $penjualan_baru->id)->first();
@@ -75,7 +75,7 @@ class PesanController extends Controller
     	}
 
     	//jumlah total
-    	$penjualan = penjualan::where('user_id', Auth::user()->id)->where('status',0)->first();
+    	$penjualan = Penjualan::where('user_id', Auth::user()->id)->where('status',0)->first();
     	$penjualan->jumlah_harga = $penjualan->jumlah_harga+$produk->harga*$request->jumlah_pesan;
     	$penjualan->update();
     	
@@ -102,7 +102,7 @@ class PesanController extends Controller
 
     public function check_out()
     {
-        $penjualan = penjualan::where('user_id', Auth::user()->id)->where('status',0)->first();
+        $penjualan = Penjualan::where('user_id', Auth::user()->id)->where('status',0)->first();
  	$detail_penjualans = [];
         if(!empty($penjualan))
         {
@@ -117,7 +117,7 @@ class PesanController extends Controller
     {
         $detail_penjualan = DetailPenjualan::where('id', $id)->first();
 
-        $penjualan = penjualan::where('id', $detail_penjualan->penjualan_id)->first();
+        $penjualan = Penjualan::where('id', $detail_penjualan->penjualan_id)->first();
         $penjualan->jumlah_harga = $penjualan->jumlah_harga-$detail_penjualan->jumlah_harga;
         $penjualan->update();
 
@@ -144,14 +144,14 @@ class PesanController extends Controller
         //     return redirect('profile');
         // }
 
-        $penjualan = penjualan::where('user_id', Auth::user()->id)->where('status',0)->first();
+        $penjualan = Penjualan::where('user_id', Auth::user()->id)->where('status',0)->first();
         $penjualan_id = $penjualan->id;
         $penjualan->status = 1;
         $penjualan->update();
 
         $detail_penjualans = DetailPenjualan::where('penjualan_id', $penjualan_id)->get();
         foreach ($detail_penjualans as $detail_penjualan) {
-            $produk = produk::where('id', $detail_penjualan->produk_id)->first();
+            $produk = Produk::where('id', $detail_penjualan->produk_id)->first();
             $produk->stok = $produk->stok-$detail_penjualan->jumlah;
             $produk->update();
         }

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Produk;
-use App\Models\penjualan;
+use App\Models\Penjualan;
 use App\Models\User;
 use App\Models\DetailPenjualan;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +17,7 @@ class HistoryController extends Controller
 
     public function index()
     {
-    	$penjualans = penjualan::where('user_id', Auth::user()->id)->where('status', '!=',0)->get();
+    	$penjualans = Penjualan::where('user_id', Auth::user()->id)->where('status', '!=',0)->get();
         $users = User::all();
 
     	return view('history.index', compact('penjualans','users'));
@@ -25,7 +25,7 @@ class HistoryController extends Controller
 
     public function detail($id)
     {
-    	$penjualan = penjualan::where('id', $id)->first();
+    	$penjualan = Penjualan::where('id', $id)->first();
     	$detail_penjualans = DetailPenjualan::where('penjualan_id', $penjualan->id)->get();
         $users = User::all();
 
