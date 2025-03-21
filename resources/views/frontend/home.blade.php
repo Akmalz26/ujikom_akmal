@@ -64,8 +64,7 @@
                         </li>
                         <li class="nav-item">
                             <?php
-                             use Illuminate\Support\Facades\Auth;
-                             $penjualan_utama = \App\Models\Penjualan::where('user_id', Auth::user()->id)->where('status',0)->first();
+                             $penjualan_utama = \App\Models\Penjualan::where('user_id', auth()->user()->id)->where('status',0)->first();
                              if(!empty($penjualan_utama))
                                 {
                                  $notif = \App\Models\DetailPenjualan::where('penjualan_id', $penjualan_utama->id)->count(); 
